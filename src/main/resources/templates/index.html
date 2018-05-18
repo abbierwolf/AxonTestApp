@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Omschrijving</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item : ${items}">
+				<td th:text="${item.id}"></td>
+				<td th:text="${item.omschrijving}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form th:action="@{/nieuw}" method="POST">
+		<label>Omschrijving:</label><input type="text" name="omschrijving"></input>
+		<input type="Submit" value="Opslaan"></input>
+	</form>
+</body>
+</html>

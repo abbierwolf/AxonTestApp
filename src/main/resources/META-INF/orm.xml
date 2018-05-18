@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+	version="2.1">
+
+	<entity class="org.axonframework.eventsourcing.eventstore.jpa.DomainEventEntry">
+		<table schema="es" name="tblDomainEventEntry" />
+	</entity>
+	<entity class="org.axonframework.eventsourcing.eventstore.jpa.SnapshotEventEntry">
+		<table schema="es" name="tblSnapshotEventEntry" />
+	</entity>
+	<entity class="org.axonframework.eventhandling.saga.repository.jpa.SagaEntry">
+		<table schema="es" name="tblSagaEntry" />
+	</entity>
+	<entity class="org.axonframework.eventhandling.saga.repository.jpa.AssociationValueEntry">
+		<table schema="es" name="tblAssociationValueEntry" />
+	</entity>
+	<entity class="org.axonframework.eventhandling.tokenstore.jpa.TokenEntry">
+		<table schema="es" name="tblTokenEntry" />
+	</entity>
+</entity-mappings>
