@@ -1,8 +1,8 @@
 package nl.amc.adict.sandbox.axon.command.model;
 
-import static nl.amc.adict.kso.util.lang.EqualsUtils.differ;
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
+import org.apache.commons.lang3.StringUtils;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -33,7 +33,7 @@ public class Item {
 
 	@CommandHandler
 	public void wijzigOmschrijving(WijzigItemOmschrijvingCommand command) {
-		if (differ(this.omschrijving, command.getOmschrijving())) {
+		if (!StringUtils.equals(this.omschrijving, command.getOmschrijving())) {
 			apply(new ItemOmschrijvingGewijzigdEvent(command.getId(), command.getOmschrijving()));
 		}
 	}
