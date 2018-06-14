@@ -15,6 +15,7 @@ import nl.amc.adict.sandbox.axon.api.ItemAangemaaktEvent;
 import nl.amc.adict.sandbox.axon.api.ItemOmschrijvingGewijzigdEvent;
 import nl.amc.adict.sandbox.axon.api.MaakItemAanCommand;
 import nl.amc.adict.sandbox.axon.api.WijzigItemOmschrijvingCommand;
+import nl.amc.adict.sandbox.axon.query.repositories.ItemQueryRepository;
 
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,9 +27,10 @@ public class Item {
 	private String omschrijving;
 
 	@CommandHandler
-	public Item(MaakItemAanCommand command) {
+	public Item(MaakItemAanCommand command, ItemQueryRepository itemQueryRepository) {
 		super();
 		apply(new ItemAangemaaktEvent(command.getId(), command.getOmschrijving()));
+		System.out.println("--"+itemQueryRepository.count());
 	}
 
 	@CommandHandler

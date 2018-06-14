@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import nl.amc.adict.sandbox.axon.api.MaakItemAanCommand;
-import nl.amc.adict.sandbox.axon.query.repositories.ItemRepository;
+import nl.amc.adict.sandbox.axon.query.repositories.ItemQueryRepository;
 
 @Controller
 public class ItemController {
@@ -33,7 +33,7 @@ public class ItemController {
 	private DataSource dataSource;
 
 	@Autowired
-	private ItemRepository itemRepository;
+	private ItemQueryRepository itemRepository;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -57,7 +57,7 @@ public class ItemController {
 			eventProcessor.shutDown();
 
 			JdbcTemplate jt = new JdbcTemplate(dataSource);
-			jt.update("DELETE FROM [es].[tblTokenEntry] WHERE processorname = ?", processorName);
+			jt.update("DELETE FROM \"es\".\"tblTokenEntry\" WHERE \"processorName\" = ?", processorName);
 
 			eventProcessor.start();
 		}
