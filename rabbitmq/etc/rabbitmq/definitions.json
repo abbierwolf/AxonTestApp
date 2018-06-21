@@ -1,0 +1,131 @@
+{
+    "bindings": [
+        {
+            "arguments": {},
+            "destination": "in.vumc",
+            "destination_type": "queue",
+            "routing_key": "",
+            "source": "events.out.AMC",
+            "vhost": "/"
+        }
+    ],
+    "exchanges": [
+        {
+            "arguments": {},
+            "auto_delete": false,
+            "durable": true,
+            "internal": false,
+            "name": "events.out.AMC",
+            "type": "fanout",
+            "vhost": "/"
+        }
+    ],
+    "parameters": [
+        {
+            "component": "federation-upstream",
+            "name": "vumc-upstream",
+            "value": {
+                "ack-mode": "on-confirm",
+                "trust-user-id": false,
+                "uri": "amqp://amc:amc@ux-o-seinuitval-1b.amc.nl"
+            },
+            "vhost": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "configure": ".*",
+            "read": "in.amc",
+            "user": "amc",
+            "vhost": "/",
+            "write": "events.out.AMC"
+        },
+        {
+            "configure": ".*",
+            "read": ".*",
+            "user": "guest",
+            "vhost": "/",
+            "write": ".*"
+        },
+        {
+            "configure": ".*",
+            "read": ".*",
+            "user": "guest",
+            "vhost": "/seinuitval",
+            "write": ".*"
+        },
+        {
+            "configure": ".*",
+            "read": ".*",
+            "user": "seinuitval",
+            "vhost": "/seinuitval",
+            "write": ".*"
+        },
+        {
+            "configure": "in.vumc",
+            "read": "in.vumc",
+            "user": "vumc",
+            "vhost": "/",
+            "write": ""
+        }
+    ],
+    "policies": [
+        {
+            "apply-to": "queues",
+            "definition": {
+                "federation-upstream-set": "all"
+            },
+            "name": "vumc-fed",
+            "pattern": "in.amc",
+            "priority": 0,
+            "vhost": "/"
+        }
+    ],
+    "queues": [
+        {
+            "arguments": {},
+            "auto_delete": false,
+            "durable": true,
+            "name": "in.amc",
+            "vhost": "/"
+        },
+        {
+            "arguments": {},
+            "auto_delete": false,
+            "durable": true,
+            "name": "in.vumc",
+            "vhost": "/"
+        }
+    ],
+    "rabbit_version": "3.3.5",
+    "users": [
+        {
+            "name": "seinuitval",
+            "password_hash": "1wXKCMqDHjJFTPg4KF2hWUziJ9o=",
+            "tags": ""
+        },
+        {
+            "name": "amc",
+            "password_hash": "FGkNqH20Azu0nkDYPlkkGdhF5yY=",
+            "tags": ""
+        },
+        {
+            "name": "guest",
+            "password_hash": "Ctt42pDCjRKTG94ilUrv5BUAbVQ=",
+            "tags": "administrator"
+        },
+        {
+            "name": "vumc",
+            "password_hash": "H5Q/cLtZNJKugW3bda/6LHU2nHs=",
+            "tags": ""
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/seinuitval"
+        },
+        {
+            "name": "/"
+        }
+    ]
+}
