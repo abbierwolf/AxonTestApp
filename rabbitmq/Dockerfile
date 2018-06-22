@@ -1,4 +1,4 @@
-FROM rabbitmq:3.6.11-management
+FROM rabbitmq:3.7.6-management
 
 MAINTAINER <a.b.bierwolf@gmail.com>
 
