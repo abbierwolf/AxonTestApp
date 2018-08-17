@@ -23,7 +23,7 @@ public class MessageListener {
 	public void receive(String message) {
 		Object event = xstream.fromXML(message);
 		if (event instanceof ItemAangemaaktEvent) {
-			itemUpdater.handle((ItemAangemaaktEvent) event, null);
+			itemUpdater.handle((ItemAangemaaktEvent) event);
 		} else if (event instanceof ItemOmschrijvingGewijzigdEvent) {
 			itemUpdater.handle((ItemOmschrijvingGewijzigdEvent) event);
 		}
