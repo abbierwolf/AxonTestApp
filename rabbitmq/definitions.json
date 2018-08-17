@@ -2,7 +2,7 @@
     "bindings": [
         {
             "arguments": {},
-            "destination": "in.vumc",
+            "destination": "events.in.VUmc",
             "destination_type": "queue",
             "routing_key": "",
             "source": "events.out.AMC",
@@ -10,7 +10,7 @@
         },
         {
             "arguments": {},
-            "destination": "in.amc",
+            "destination": "events.in.AMC",
             "destination_type": "queue",
             "routing_key": "",
             "source": "events.out.VUmc",
@@ -40,7 +40,7 @@
     "permissions": [
         {
             "configure": ".*",
-            "read": "in.amc",
+            "read": "events.in.AMC",
             "user": "amc",
             "vhost": "/",
             "write": "events.out.AMC"
@@ -53,11 +53,23 @@
             "write": ".*"
         },
         {
-            "configure": "in.vumc",
-            "read": "in.vumc",
+            "configure": "events.in.VUmc",
+            "read": "events.in.VUmc",
             "user": "vumc",
             "vhost": "/",
             "write": "events.out.VUmc"
+        }
+    ],
+    "policies": [
+        {
+            "apply-to": "queues",
+            "definition": {
+                "ha-mode": "all"
+            },
+            "name": "ha-queues",
+            "pattern": "events.in.*",
+            "priority": 0,
+            "vhost": "/"
         }
     ],
     "queues": [
@@ -65,32 +77,40 @@
             "arguments": {},
             "auto_delete": false,
             "durable": true,
-            "name": "in.amc",
+            "name": "events.in.AMC",
             "vhost": "/"
         },
         {
             "arguments": {},
             "auto_delete": false,
             "durable": true,
-            "name": "in.vumc",
+            "name": "events.in.VUmc",
             "vhost": "/"
         }
     ],
-    "rabbit_version": "3.3.5",
     "users": [
         {
-            "name": "amc",
-            "password_hash": "FGkNqH20Azu0nkDYPlkkGdhF5yY=",
-            "tags": ""
-        },
-        {
-            "name": "guest",
-            "password_hash": "Ctt42pDCjRKTG94ilUrv5BUAbVQ=",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "name": "abbierwolf",
+            "password_hash": "4yIJ49gEk0i4QDR0/YBvs7zAuGMwYJi426K9GHQUfBHOS8kY",
             "tags": "administrator"
         },
         {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "name": "amc",
+            "password_hash": "/IYlhW523cr/exY5J7aABOKl0QSAEXDmEi12nRL4vjwBEKDD",
+            "tags": ""
+        },
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "name": "guest",
+            "password_hash": "kI3GCqW5JLMJa4iX1lo7X4D6XbYqlLgxIs30+P6tENUV2POR",
+            "tags": "administrator"
+        },
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
             "name": "vumc",
-            "password_hash": "H5Q/cLtZNJKugW3bda/6LHU2nHs=",
+            "password_hash": "DOhXMrvZRuT3A2/k5Jm4KBPJe95mEoD0zLmtWsv5c6o/N1fa",
             "tags": ""
         }
     ],
